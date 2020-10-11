@@ -5,6 +5,9 @@ Autor: gustavo de Oliveira Vital
 Data: 11 de Outubro de 2020
 */
 
+// Diretorio de trabalho
+cd e:\STATA\Other
+
 // Base de dados
 
 infile str14 country setting effort change using https://data.princeton.edu/wws509/datasets/effort.raw, clear
@@ -36,3 +39,13 @@ replace pos = 2 if country == "Panama" | country == "Nicaragua"
 
 graph twoway (lfitci change setting) (scatter change setting, mlabel(country) mlabv(pos)), legend(off) 
 
+// Gráfico final
+
+graph twoway (lfitci change setting) (scatter change setting, mlabel(country) mlabv(pos)), title("Fertility Decline by Social Setting") ytitle("Fertility Decline") legend(ring(0) pos(5) order(2 "linear fit" 1 "95% CI")) 
+
+graph export graph_01.png, width(500) replace 
+graph export graph_01.pdf
+
+/* 
+Para mais informação, ver: https://data.princeton.edu/stata/graphics 
+*/
